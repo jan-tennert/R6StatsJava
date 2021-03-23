@@ -21,3 +21,38 @@ System.out.println(leaderboard.getPlayerAtPosition(1).getKd());
 ```
 -> These are not all features there are much more. You have to test around yourself.
 
+# Installation:
+
+### Maven
+
+```xml
+<repositories>
+  <repository>
+	 <id>jitpack.io</id>
+	 <url>https://jitpack.io</url>
+ </repository>
+ </repositories>
+```
+```xml
+<dependency>
+  <groupId>com.github.jan-tennert</groupId>
+  <artifactId>R6StatsJava</artifactId>
+  <version>1.1</version>
+</dependency>
+```
+
+### Gradle
+
+```gradle
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+```
+```gradle
+dependencies {
+      implementation 'com.github.jan-tennert:R6StatsJava:1.1'
+}
+```
