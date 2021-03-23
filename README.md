@@ -31,7 +31,7 @@ System.out.println(leaderboard.getPlayerAtPosition(1).getKd());
 	 <id>jitpack.io</id>
 	 <url>https://jitpack.io</url>
  </repository>
- </repositories>
+</repositories>
 ```
 ```xml
 <dependency>
