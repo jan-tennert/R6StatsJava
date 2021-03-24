@@ -1,9 +1,9 @@
 package de.jan.r6statsjava
 
-class R6GameTime(val seconds: Int) {
+class R6GameTime(val seconds: Long) {
 
-    fun toMilliseconds() : Int {
-        return seconds * 1000
+    fun toMilliseconds() : Long {
+        return seconds * 1000.toLong()
     }
 
     fun toMinutes() : Double {
