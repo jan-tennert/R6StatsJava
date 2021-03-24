@@ -26,7 +26,7 @@ class R6Operator(data: JSONObject) {
         if(data.has("abilities")) {
             for (any in data.getJSONArray("abilities")) {
                 val a = any as JSONObject
-                ab.add(Ability(a.getString("ability"), a.getInt("value")))
+                ab.add(Ability(a.getString("ability"), if(a.isNull("value")) 0 else a.getInt("value")))
             }
         }
         abilities = ab.toTypedArray()
