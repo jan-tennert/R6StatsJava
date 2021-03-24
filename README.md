@@ -1,5 +1,5 @@
 # R6StatsJava
-A complete R6Stats api wrapper for java\
+A complete R6Stats api client for java\
 _Requires an api key which you can get from the discord server from [R6Stats](https://r6stats.com)_
 
 # Examples:
