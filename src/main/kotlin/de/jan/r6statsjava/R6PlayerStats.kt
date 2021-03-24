@@ -4,6 +4,10 @@ import org.json.JSONObject
 
 class R6PlayerStats(data: JSONObject) {
 
+    init {
+        println(data)
+    }
+
     val kills = data.getLong("kills")
     val wins = data.getLong("wins")
     val penetrationKills = data.getLong("penetration_kills")
