@@ -6,6 +6,7 @@ class R6PlayerStats(data: JSONObject) {
 
     init {
         println(data)
+        println(data.getInt("kills"))
     }
 
     val kills = data.getLong("kills")
