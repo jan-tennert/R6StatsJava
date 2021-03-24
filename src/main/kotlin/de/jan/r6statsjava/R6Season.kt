@@ -5,6 +5,10 @@ import java.text.SimpleDateFormat
 
 class R6Season(data: JSONObject) {
 
+    init {
+        println(data)
+    }
+
     private val formatter = SimpleDateFormat("yyyy-MM-dd")
     val startDate = formatter.parse(data.getString("start_date"))
     val endDate = if(data.isNull("end_date")) null else formatter.parse(data.getString("end_date"))
@@ -13,7 +17,7 @@ class R6Season(data: JSONObject) {
     val kills = if(region.isNull("kills")) 0 else region.getLong("kills")
     val maxRankText = region.getString("max_rank_text")
     val losses = if(region.isNull("losses")) 0 else region.getLong("losses")
-    val championsRankPosition = region.getInt("champions_rank_position")
+    val championsRankPosition = if(region.isNull("champions_rank_position")) 0 else region.getInt("champions_rank_position")
     val mmr = if(region.isNull("mmr")) 0 else region.getInt("mmr")
     val rank = region.getInt("rank")
     val deaths = region.getLong("deaths")
