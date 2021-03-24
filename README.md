@@ -46,7 +46,7 @@ r6.getR6WeaponStats("TheRealJanPANDA", R6Stats.Platform.PC).sortWeaponsBy(R6Weap
 <dependency>
   <groupId>com.github.jan-tennert</groupId>
   <artifactId>R6StatsJava</artifactId>
-  <version>1.2.1</version>
+  <version>1.2.2</version>
 </dependency>
 ```
 
@@ -62,6 +62,6 @@ allprojects {
 ```
 ```gradle
 dependencies {
-      implementation 'com.github.jan-tennert:R6StatsJava:1.2.1'
+      implementation 'com.github.jan-tennert:R6StatsJava:1.2.2'
 }
 ```
