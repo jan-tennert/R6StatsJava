@@ -23,7 +23,8 @@ class R6SeasonalStats(private val data: JSONObject) {
     val emberRise = getSeason("ember_rise")
     val windBastion = getSeason("wind_bastion")
 
-    private fun getSeason(season: String) : R6Season {
+    fun getSeason(season: String) : R6Season {
+        if(!data.has(season)) throw R6StatsException("Season wasn't found")
         return R6Season(data.getJSONObject("seasons").getJSONObject(season))
     }
 

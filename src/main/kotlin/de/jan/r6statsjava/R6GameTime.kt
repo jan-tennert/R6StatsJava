@@ -22,5 +22,12 @@ class R6GameTime(val seconds: Long) {
         return seconds / 604800.toDouble()
     }
 
+    fun toDuration() : String {
+        return String.format("%d:%02d:%02d", seconds / 3600, (seconds % 3600) / 60, (seconds % 60));
+    }
+
+    override fun toString(): String {
+        return "${toHours()} hours"
+    }
 
 }

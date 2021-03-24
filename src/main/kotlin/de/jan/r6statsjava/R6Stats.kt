@@ -23,35 +23,35 @@ class R6Stats(private val apiKey: String) {
     fun getR6PlayerStats(username: String, platform: Platform): R6Player {
         val name = URLEncoder.encode(username, "UTF-8")
         val result = makeRequest("stats/$name/${platform.key}/generic")
-        if(result.toString().toLowerCase().contains("no_records_found")) throw R6StatsException("Player not found on this platform")
+        checkForError(result.toString())
         return R6Player(result)
     }
 
     fun getR6PlayerSeasonalStats(username: String, platform: Platform) : R6SeasonalStats {
         val name = URLEncoder.encode(username, "UTF-8")
         val result = makeRequest("stats/$name/${platform.key}/seasonal")
-        if(result.toString().toLowerCase().contains("no_records_found")) throw R6StatsException("Player not found on this platform")
+        checkForError(result.toString())
         return R6SeasonalStats(result)
     }
 
     fun getR6OperatorStats(username: String, platform: Platform) : R6OperatorStats {
         val name = URLEncoder.encode(username, "UTF-8")
         val result = makeRequest("stats/$name/${platform.key}/operators")
-        if(result.toString().toLowerCase().contains("no_records_found")) throw R6StatsException("Player not found on this platform")
+        checkForError(result.toString())
         return R6OperatorStats(makeRequest("stats/$username/${platform.key}/operators"))
     }
 
     fun getR6WeaponCategoryStats(username: String, platform: Platform) : R6WeaponCategoryStats {
         val name = URLEncoder.encode(username, "UTF-8")
         val result = makeRequest("stats/$name/${platform.key}/weapon-categories")
-        if(result.toString().toLowerCase().contains("no_records_found")) throw R6StatsException("Player not found on this platform")
+        checkForError(result.toString())
         return R6WeaponCategoryStats(makeRequest("stats/$username/${platform.key}/weapon-categories"))
     }
 
     fun getR6WeaponStats(username: String, platform: Platform) : R6WeaponStats {
         val name = URLEncoder.encode(username, "UTF-8")
         val result = makeRequest("stats/$name/${platform.key}/weapons")
-        if(result.toString().toLowerCase().contains("no_records_found")) throw R6StatsException("Player not found on this platform")
+        checkForError(result.toString())
         return R6WeaponStats(makeRequest("stats/$username/${platform.key}/weapons"))
     }
 
@@ -59,7 +59,12 @@ class R6Stats(private val apiKey: String) {
         return R6Leaderboard(makeLeaderboardRequest("leaderboard/${platform.key}/${region.key}"))
     }
 
-    fun makeRequest(endpoint: String) : JSONObject {
+    private fun checkForError(data: String) {
+        if(data.toLowerCase().contains("server_error")) throw R6StatsException("The player has no stats")
+        if(data.toLowerCase().contains("no_records_found")) throw R6StatsException("Player not found on this platform")
+    }
+
+    private fun makeRequest(endpoint: String) : JSONObject {
         val request = Request.Builder()
             .url(baseURL + endpoint)
             .get()
@@ -68,7 +73,7 @@ class R6Stats(private val apiKey: String) {
         return JSONObject(okhttp.newCall(request).execute().body!!.string())
     }
 
-    fun makeLeaderboardRequest(endpoint: String) : JSONArray {
+    private fun makeLeaderboardRequest(endpoint: String) : JSONArray {
         val request = Request.Builder()
             .url(baseURL + endpoint)
             .get()

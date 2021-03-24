@@ -15,4 +15,8 @@ class R6Weapon(data: JSONObject) {
     val deaths = data.getLong("deaths")
     val timesChosen = data.getLong("times_chosen")
 
+    enum class SortValue {
+        KILLS, WEAPON, KD, DEATHS, TIMES_CHOSEN, HEADSHOT_PERCENTAGE, HEADSHOTS
+    }
+
 }

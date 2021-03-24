@@ -28,4 +28,21 @@ class R6WeaponCategoryStats(data: JSONObject) {
         return wc
     }
 
+    fun sortWeaponCategoriesBy(value: R6WeaponCategory.SortValue) : Array<R6WeaponCategory> {
+        val ops = categories
+        ops.sortWith { o1, o2 ->
+            when(value) {
+                R6WeaponCategory.SortValue.KILLS -> o1.kills.compareTo(o2.kills)
+                R6WeaponCategory.SortValue.HEADHSHOTS -> o1.headshots.compareTo(o2.headshots)
+                R6WeaponCategory.SortValue.KD -> o1.kd.compareTo(o2.kd)
+                R6WeaponCategory.SortValue.CATEGORY -> o1.category.compareTo(o2.category)
+                R6WeaponCategory.SortValue.HEADSHOT_PERCENTAGE -> o1.headshotPercentage.compareTo(o2.headshotPercentage)
+                R6WeaponCategory.SortValue.DEATHS -> o1.deaths.compareTo(o2.deaths)
+                R6WeaponCategory.SortValue.TIMES_CHOSEN -> o1.timesChosen.compareTo(o2.timesChosen)
+            }
+        }
+        ops.reverse()
+        return ops
+    }
+
 }

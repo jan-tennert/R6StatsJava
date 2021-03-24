@@ -34,4 +34,8 @@ class R6Operator(data: JSONObject) {
 
     class Ability(val ability: String, val value: Int)
 
+    enum class SortValue {
+        WINS, KILLS, DEATHS, KD, NAME, HEADSHOTS, WL, LOSSES, PLAYTIME
+    }
+
 }

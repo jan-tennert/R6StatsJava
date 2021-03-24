@@ -4,10 +4,6 @@ import org.json.JSONObject
 
 class R6Player(data: JSONObject) {
 
-    init {
-        println(data)
-    }
-
     val lastUpdated = data.getString("last_updated").toDate()
 
     val generalStats = R6PlayerStats(data.getJSONObject("stats").getJSONObject("general"))
@@ -26,5 +22,9 @@ class R6Player(data: JSONObject) {
     val uplayID = if(data.has("uplay_id")) data.getString("uplay_id") else null
     val avatarURL146 = if(data.has("avatar_url_146")) data.getString("avatar_url_146") else null
     val avatarURL256 = if(data.has("avatar_url_256")) data.getString("avatar_url_256") else null
+
+    override fun toString(): String {
+        return username
+    }
 
 }
