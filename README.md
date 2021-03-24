@@ -19,6 +19,14 @@ System.out.println(seasonal.getCrimsonHeist().getKills());
 R6Leaderboard leaderboard = r6.getR6Leaderboard(R6Stats.Platform.PC, R6Stats.Region.ALL);
 System.out.println(leaderboard.getPlayerAtPosition(1).getKd());
 ```
+You can also sort the lists at R6OperatorStats, R6WeaponStats, R6WeaponCategoryStats. Examples:
+```java
+r6.getR6OperatorStats("TheRealJanPANDA", R6Stats.Platform.PC).sortOperatorsBy(R6Operator.SortValue.KILLS)
+r6.getR6OperatorStats("TheRealJanPANDA", R6Stats.Platform.PC).sortAttackersBy(R6Operator.SortValue.KILLS)
+
+r6.getR6WeaponStats("TheRealJanPANDA", R6Stats.Platform.PC).sortWeaponsBy(R6Weapon.SortValue.KILLS)
+```
+
 -> These are not all features there are much more. You have to test around yourself.
 
 # Installation:
@@ -37,7 +45,7 @@ System.out.println(leaderboard.getPlayerAtPosition(1).getKd());
 <dependency>
   <groupId>com.github.jan-tennert</groupId>
   <artifactId>R6StatsJava</artifactId>
-  <version>1.1</version>
+  <version>1.2</version>
 </dependency>
 ```
 
@@ -53,6 +61,6 @@ allprojects {
 ```
 ```gradle
 dependencies {
-      implementation 'com.github.jan-tennert:R6StatsJava:1.1'
+      implementation 'com.github.jan-tennert:R6StatsJava:1.2'
 }
 ```
