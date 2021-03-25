@@ -27,5 +27,6 @@ class R6PlayerStats(data: JSONObject) {
     val dbnos = data.getLong("dbnos")
     val meleeKills = data.getLong("melee_kills")
     val deaths = data.getLong("deaths")
+    val distanceTravelled = R6Distance(data.getLong("distance_travelled"))
 
 }
