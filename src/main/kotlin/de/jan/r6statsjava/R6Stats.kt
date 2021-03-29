@@ -20,6 +20,13 @@ class R6Stats(private val apiKey: String) {
         if(makeRequest("stats/TheRealJanPANDA/pc/generic").toString().toLowerCase().contains("invalid api key")) throw R6StatsException("Invalid API Key")
     }
 
+    /**
+     * Get general stats like global kills, deaths or kills in a specific gamemode
+     * @param username The rainbow six player username
+     * @param platform The platform the rainbow six player is playing
+     * @see Platform
+     * @see R6Player
+     */
     fun getR6PlayerStats(username: String, platform: Platform): R6Player {
         val name = URLEncoder.encode(username, "UTF-8")
         val result = makeRequest("stats/$name/${platform.key}/generic")
@@ -27,6 +34,13 @@ class R6Stats(private val apiKey: String) {
         return R6Player(result)
     }
 
+    /**
+     * Get stats for a specific season for example crimson heist kills, mmr, rank
+     * @param username The rainbow six player username
+     * @param platform The platform the rainbow six player is playing
+     * @see Platform
+     * @see R6SeasonalStats
+     */
     fun getR6PlayerSeasonalStats(username: String, platform: Platform) : R6SeasonalStats {
         val name = URLEncoder.encode(username, "UTF-8")
         val result = makeRequest("stats/$name/${platform.key}/seasonal")
@@ -34,6 +48,13 @@ class R6Stats(private val apiKey: String) {
         return R6SeasonalStats(result)
     }
 
+    /**
+     * Get operator stats like kills with ash etc.
+     * @param username The rainbow six player username
+     * @param platform The platform the rainbow six player is playing
+     * @see Platform
+     * @see R6OperatorStats
+     */
     fun getR6OperatorStats(username: String, platform: Platform) : R6OperatorStats {
         val name = URLEncoder.encode(username, "UTF-8")
         val result = makeRequest("stats/$name/${platform.key}/operators")
@@ -41,6 +62,13 @@ class R6Stats(private val apiKey: String) {
         return R6OperatorStats(makeRequest("stats/$username/${platform.key}/operators"))
     }
 
+    /**
+     * Get weapon category stats like kills with Assault Rifles
+     * @param username The rainbow six player username
+     * @param platform The platform the rainbow six player is playing
+     * @see Platform
+     * @see R6WeaponCategoryStats
+     */
     fun getR6WeaponCategoryStats(username: String, platform: Platform) : R6WeaponCategoryStats {
         val name = URLEncoder.encode(username, "UTF-8")
         val result = makeRequest("stats/$name/${platform.key}/weapon-categories")
@@ -48,6 +76,13 @@ class R6Stats(private val apiKey: String) {
         return R6WeaponCategoryStats(makeRequest("stats/$username/${platform.key}/weapon-categories"))
     }
 
+    /**
+     * Get weapon stats like kills with the Commando 9
+     * @param username The rainbow six player username
+     * @param platform The platform the rainbow six player is playing
+     * @see Platform
+     * @see R6WeaponStats
+     */
     fun getR6WeaponStats(username: String, platform: Platform) : R6WeaponStats {
         val name = URLEncoder.encode(username, "UTF-8")
         val result = makeRequest("stats/$name/${platform.key}/weapons")
@@ -55,6 +90,14 @@ class R6Stats(private val apiKey: String) {
         return R6WeaponStats(makeRequest("stats/$username/${platform.key}/weapons"))
     }
 
+    /**
+     * Get the top 100 players of a specific platform and region
+     * @param platform - The platform for the leaderboard
+     * @param region - The region for the leaderboard
+     * @see Platform
+     * @see Region
+     * @see R6Leaderboard
+     */
     fun getR6Leaderboard(platform: Platform, region: Region): R6Leaderboard {
         return R6Leaderboard(makeLeaderboardRequest("leaderboard/${platform.key}/${region.key}"))
     }
@@ -93,9 +136,3 @@ class R6Stats(private val apiKey: String) {
 }
 
 class R6StatsException(e: String) : Exception(e)
-
-fun String.toDate() : Date {
-    val formatter = SimpleDateFormat("yyyy-MM-ddHH:mm:ss.SSS");
-    val dateString = this.replace("T", "").replace("Z", "")
-    return formatter.parse(dateString)
-}

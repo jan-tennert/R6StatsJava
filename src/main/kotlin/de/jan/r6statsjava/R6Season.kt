@@ -1,13 +1,12 @@
 package de.jan.r6statsjava
 
+import de.jan.jkutils.toDate
 import org.json.JSONObject
-import java.text.SimpleDateFormat
 
 class R6Season(data: JSONObject) {
 
-    private val formatter = SimpleDateFormat("yyyy-MM-dd")
-    val startDate = formatter.parse(data.getString("start_date"))
-    val endDate = if(data.isNull("end_date")) null else formatter.parse(data.getString("end_date"))
+    val startDate = data.getString("start_date").toDate("yyyy-MM-dd")
+    val endDate = if(data.isNull("end_date")) null else data.getString("end_date").toDate("yyyy-MM-dd")
     val region = (data.getJSONObject("regions").getJSONArray("ncsa")[0] as JSONObject)
     val nextRankMMR = region.getLong("next_rank_mmr")
     val kills = if(region.isNull("kills")) 0 else region.getLong("kills")

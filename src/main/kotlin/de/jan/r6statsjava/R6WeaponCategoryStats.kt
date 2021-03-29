@@ -1,10 +1,11 @@
 package de.jan.r6statsjava
 
+import de.jan.jkutils.toDate
 import org.json.JSONObject
 
 class R6WeaponCategoryStats(data: JSONObject) {
 
-    val lastUpdated = data.getString("last_updated").toDate()
+    val lastUpdated = data.getString("last_updated").replace("T", "").replace("Z", "").toDate("yyyy-MM-ddHH:mm:ss.SSS")
     val categories: Array<R6WeaponCategory>
 
     init {

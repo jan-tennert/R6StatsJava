@@ -1,10 +1,11 @@
 package de.jan.r6statsjava
 
+import de.jan.jkutils.toDate
 import org.json.JSONObject
 
 class R6SeasonalStats(private val data: JSONObject) {
 
-    val lastUpdated = data.getString("last_updated").toDate()
+    val lastUpdated = data.getString("last_updated").replace("T", "").replace("Z", "").toDate("yyyy-MM-ddHH:mm:ss.SSS")
 
     val crimsonHeist = getSeason("crimson_heist")
     val paraBellum = getSeason("para_bellum")
