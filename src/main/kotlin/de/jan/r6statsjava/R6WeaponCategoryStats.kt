@@ -3,19 +3,18 @@ package de.jan.r6statsjava
 import de.jan.jkutils.toDate
 import org.json.JSONObject
 
-class R6WeaponCategoryStats(data: JSONObject) {
+class R6WeaponCategoryStats(private val data: JSONObject) {
 
     val lastUpdated = data.getString("last_updated").replace("T", "").replace("Z", "").toDate("yyyy-MM-ddHH:mm:ss.SSS")
     val categories: Array<R6WeaponCategory>
-
-    init {
-        val ca = arrayListOf<R6WeaponCategory>()
-        for (any in data.getJSONArray("categories")) {
-            val c = any as JSONObject
-            ca.add(R6WeaponCategory(c))
+        get() {
+            val ca = arrayListOf<R6WeaponCategory>()
+            for (any in data.getJSONArray("categories")) {
+                val c = any as JSONObject
+                ca.add(R6WeaponCategory(c))
+            }
+            return ca.toTypedArray()
         }
-        categories = ca.toTypedArray()
-    }
 
     fun getWeaponCategory(category: String, ignoreCase: Boolean = true) : R6WeaponCategory? {
         var wc: R6WeaponCategory? = null

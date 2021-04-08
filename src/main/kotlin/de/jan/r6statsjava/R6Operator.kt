@@ -2,7 +2,7 @@ package de.jan.r6statsjava
 
 import org.json.JSONObject
 
-class R6Operator(data: JSONObject) {
+class R6Operator(private val data: JSONObject) {
 
     val kills = data.getLong("kills")
     val wins = data.getLong("wins")
@@ -12,6 +12,16 @@ class R6Operator(data: JSONObject) {
     val losses = data.getLong("losses")
     val experience = data.getLong("experience")
     val abilities: Array<Ability>
+        get() {
+            val ab = arrayListOf<Ability>()
+            if(data.has("abilities")) {
+                for (any in data.getJSONArray("abilities")) {
+                    val a = any as JSONObject
+                    ab.add(Ability(a.getString("ability"), if(a.isNull("value")) 0 else a.getInt("value")))
+                }
+            }
+            return ab.toTypedArray()
+        }
     val headshots = data.getLong("headshots")
     val wl = data.getLong("wl")
     val name = data.getString("name")
@@ -20,17 +30,6 @@ class R6Operator(data: JSONObject) {
     val meleeKills = data.getLong("melee_kills")
     val deaths = data.getLong("deaths")
     val image = if(data.has("badge_image")) data.getString("badge_image") else null
-
-    init {
-        val ab = arrayListOf<Ability>()
-        if(data.has("abilities")) {
-            for (any in data.getJSONArray("abilities")) {
-                val a = any as JSONObject
-                ab.add(Ability(a.getString("ability"), if(a.isNull("value")) 0 else a.getInt("value")))
-            }
-        }
-        abilities = ab.toTypedArray()
-    }
 
     class Ability(val ability: String, val value: Int)
 

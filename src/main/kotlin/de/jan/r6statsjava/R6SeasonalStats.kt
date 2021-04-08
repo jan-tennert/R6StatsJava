@@ -7,6 +7,7 @@ class R6SeasonalStats(private val data: JSONObject) {
 
     val lastUpdated = data.getString("last_updated").replace("T", "").replace("Z", "").toDate("yyyy-MM-ddHH:mm:ss.SSS")
 
+    val seasons = arrayListOf<R6Season>()
     val crimsonHeist = getSeason("crimson_heist")
     val paraBellum = getSeason("para_bellum")
     val voidEdge = getSeason("void_edge")
@@ -24,9 +25,17 @@ class R6SeasonalStats(private val data: JSONObject) {
     val emberRise = getSeason("ember_rise")
     val windBastion = getSeason("wind_bastion")
 
+
     fun getSeason(season: String) : R6Season {
         if(!data.getJSONObject("seasons").has(season)) throw R6StatsException("Season wasn't found")
         return R6Season(data.getJSONObject("seasons").getJSONObject(season))
+    }
+
+    private fun getSeason(season: String, addToSeasons: Boolean) : R6Season {
+        if(!data.getJSONObject("seasons").has(season)) throw R6StatsException("Season wasn't found")
+        val r6season = R6Season(data.getJSONObject("seasons").getJSONObject(season))
+        seasons.add(r6season)
+        return r6season
     }
 
 }
