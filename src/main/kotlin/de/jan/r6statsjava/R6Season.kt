@@ -22,9 +22,11 @@ class R6Season(data: JSONObject) {
     val abandons = region.getInt("abandons")
     val seasonId = region.getInt("season_id")
     val maxRankImage = region.getString("max_rank_image")
+    val maxRankImagePNG = maxRankImage.replace("ranks", "rank-imgs").replace("svg", "png")
     val lastMatchMMRChange = if(region.isNull("last_match_mmr_change")) 0 else region.getInt("last_match_mmr_change")
     val maxRank = region.getInt("max_rank")
     val prevRankMMR = region.getLong("prev_rank_mmr")
     val rankImage = region.getString("rank_image")
+    val rankImagePNG = maxRankImage.replace("ranks", "rank-imgs").replace("svg", "png")
     val seasonName = data.getString("name")
 }
