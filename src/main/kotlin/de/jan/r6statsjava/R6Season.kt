@@ -27,6 +27,6 @@ class R6Season(data: JSONObject) {
     val maxRank = region.getInt("max_rank")
     val prevRankMMR = region.getLong("prev_rank_mmr")
     val rankImage = region.getString("rank_image")
-    val rankImagePNG = maxRankImage.replace("ranks", "rank-imgs").replace("svg", "png")
+    val rankImagePNG = rankImage.replace("ranks", "rank-imgs").replace("svg", "png")
     val seasonName = data.getString("name")
 }
