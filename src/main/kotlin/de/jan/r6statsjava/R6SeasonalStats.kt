@@ -24,6 +24,7 @@ class R6SeasonalStats(private val data: JSONObject) {
     val burntHorizon = getSeason("burnt_horizon", true)
     val emberRise = getSeason("ember_rise", true)
     val windBastion = getSeason("wind_bastion", true)
+    val northStar = getSeason("north_star", true)
 
 
     fun getSeason(season: String) : R6Season {
